@@ -1,0 +1,294 @@
+/* === GLOBAL RESETS === */
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  #root {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+  
+  body {
+    background: #000;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* === HERO (HOME PAGE) === */
+  .home-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .home-card {
+    max-width: 900px;
+  }
+  .brand-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ff7518;
+    margin: 0;
+  }
+  .brand-sub {
+    font-size: 1rem;
+    color: #aaa;
+    margin: .25rem 0 2rem;
+  }
+  .hero-headline {
+    color: #ff7518;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin: 0 0 1rem;
+  }
+  .hero-sub {
+    color: #ddd;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto 2rem;
+  }
+  .cta-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  /* Buttons */
+  .btn-hero {
+    background: #ff7518;
+    color: #000;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 2px solid #ff7518;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  .btn-hero:hover {
+    background: #fff;
+    color: #000;
+  }
+  .btn-outline {
+    background: transparent;
+    color: #ff7518;
+  }
+  .btn-outline:hover {
+    background: #ff7518;
+    color: #000;
+  }
+  
+  /* === NAVBAR (if used) === */
+  .navbar-orange {
+    background-color: #ff7518;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  .nav-link-custom {
+    color: #000;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .nav-link-custom:hover {
+    color: #fff;
+  }
+  .nav-links-right {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  /* === STUDENT PORTAL PAGE === */
+  .student-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    color: #fff;
+  }
+  .student-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .home-icon {
+    position: absolute;
+    left: 1rem;
+    color: #ff7518;
+    transition: color 0.3s ease;
+  }
+  .home-icon:hover {
+    color: #fff;
+  }
+  .student-title {
+    color: #ff7518;
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .student-sub {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #ff7518;
+  }
+  .student-form {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .course-select {
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #222;
+    color: #fff;
+  }
+  .question-box {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    border: none;
+    background: #333;
+    color: #fff;
+    resize: vertical;
+  }
+  /* === CHATBOT INTERFACE === */
+.chat-window {
+    width: 100%;
+    max-width: 700px;
+    background: #111;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+
+    /* Fixes */
+    height: 62vh;            /* shrink further */
+    overflow-y: auto;        /* scroll inside */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  /* Chat bubbles */
+  .chat-bubble {
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    max-width: 75%;
+    font-size: 1rem;
+  }
+  .student-msg {
+    background: #ff7518;
+    color: #000;
+    margin-left: auto;
+    border-bottom-right-radius: 2px;
+  }
+  .ai-msg {
+    background: #333;
+    color: #fff;
+    margin-right: auto;
+    border-bottom-left-radius: 2px;
+  }
+  
+  /* Input row */
+  .chat-input-row {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .chat-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    border: none;
+    background: #333;
+    color: #fff;
+    font-size: 1rem;
+  }
+  .chat-input:focus {
+    outline: 2px solid #ff7518;
+  }
+
+  /* === TEACHER PORTAL === */
+.file-upload-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    color: #ff7518;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .file-upload-label:hover {
+    background: #ff7518;
+    color: #000;
+  }
+  .file-input {
+    display: none; /* hide default input */
+  }
+  
+  .teacher-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  
+  /* File button */
+  .file-button {
+    background: #222;
+    color: #ff7518;
+    padding: 0.6rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .file-button:hover {
+    background: #ff7518;
+    color: #000;
+  }
+  
+  
+  /* === ANIMATIONS === */
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
