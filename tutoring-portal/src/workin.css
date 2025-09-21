@@ -1,0 +1,76 @@
+/* Hard reset (also overrides Vite index.css if still present) */
+html, body, #root { height: 100%; width: 100%; margin: 0; padding: 0; }
+#root { max-width: none !important; padding: 0 !important; }
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Center the ONE container div */
+.home-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;    /* vertical center */
+  justify-content: center;/* horizontal center */
+  text-align: center;
+  padding: 0 1rem;        /* tiny side breathing room on small screens */
+}
+
+.home-card {
+  max-width: 900px;
+}
+
+/* Brand */
+.brand-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ff7518;
+  margin: 0;
+}
+.brand-sub {
+  font-size: 1rem;
+  color: #aaa;
+  margin: .25rem 0 2rem;
+}
+
+/* Hero text */
+.hero-headline {
+  color: #ff7518;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin: 0 0 1rem;
+}
+.hero-sub {
+  color: #ddd;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 0 auto 2rem;
+}
+
+/* Buttons */
+.cta-row { display: flex; gap: 1rem; justify-content: center; }
+
+.btn-hero {
+  background: #ff7518;
+  color: #000;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 2px solid #ff7518;
+  transition: all .25s ease;
+}
+.btn-hero:hover { background: #fff; color: #000; }
+
+.btn-outline { background: transparent; color: #ff7518; }
+.btn-outline:hover { background: #ff7518; color: #000; }
+
+/* Fade-in */
+.fade-in { opacity: 0; animation: fadeIn 1s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+
