@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File
 import uvicorn
 from uploadContext import uploadClient
+from SupermemoryOpenAIClient import SupermemoryOpenAI
 import boto3
 from pydantic import BaseModel
 import os
@@ -12,8 +13,13 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 SUPERMEMORY_API_KEY = os.getenv("SUPERMEMORY_API_KEY")
 
+"""
+***Query all API endpoints using 127.0.0.1:8000/{insert endpoint here}
+"""
+
 app = FastAPI()
 uploadClient = uploadClient(os.environ['SUPERMEM_API_KEY'])
+model = SupermemoryOpenAI(os.environ['OPENAI_API_KEY'], os.environ['SUPERMEM_API_KEY'], "user123")
 
 # DynamoDB client
 dynamodb = boto3.resource("dynamodb", region_name="us-east-1")
@@ -29,6 +35,30 @@ class Student(BaseModel):
 class Text(BaseModel):
     section: str
     text: str
+
+class Query(BaseModel):
+    question: str
+
+"""
+ send json object of the following format:
+ {
+    "question": "{question entered by user}"
+ }
+
+ expected response is of format:
+ {
+    "status": 200,
+    "message": "{LLM response}"
+ }
+"""
+@app.get("/query")
+async def query_llm(query: Query):
+    return {
+        "status": 200,
+        "message": model.query_LLM(query.question)
+        }
+
+
 
 @app.post("/upload/file")
 async def upload_context_file(file: UploadFile = File(...)):
