@@ -14,6 +14,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 SUPERMEMORY_API_KEY = os.getenv("SUPERMEMORY_API_KEY")
 
 """
+Set environment variables SUPERMEM_API_KEY and OPENAI_API_KEY as shown on the doc
 ***Query all API endpoints using 127.0.0.1:8000/{insert endpoint here}
 """
 
