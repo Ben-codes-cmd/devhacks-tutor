@@ -1,24 +1,40 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHome, FaPaperclip } from "react-icons/fa";
+import axios from "axios";
 
 export default function Student() {
   const [messages, setMessages] = useState([
-    { from: "ai", text: "Hi! I’m your Tutor AI . Ask me anything about your course!" }
+    { from: "ai", text: "Hi! I’m your Tutor AI 🤖. Ask me anything about your course!" }
   ]);
   const [input, setInput] = useState("");
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
-    setMessages([...messages, { from: "student", text: input }]);
-    setInput("");
-    // For now, fake AI reply
-    setTimeout(() => {
+
+    // Add student message to chat
+    setMessages((prev) => [...prev, { from: "student", text: input }]);
+
+    try {
+      // Send question to FastAPI backend
+      const res = await axios.post("http://127.0.0.1:8000/query", {
+        question: input,
+      });
+
+      // Add AI response to chat
       setMessages((prev) => [
         ...prev,
-        { from: "ai", text: "This is where Tutor AI would reply with an answer." }
+        { from: "ai", text: res.data.message || "No response from AI." }
       ]);
-    }, 1000);
+    } catch (error) {
+      console.error("Error querying Tutor AI:", error);
+      setMessages((prev) => [
+        ...prev,
+        { from: "ai", text: "⚠️ Error: Could not connect to Tutor AI." }
+      ]);
+    }
+
+    setInput(""); // clear input box
   };
 
   return (
