@@ -1,8 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
+import uvicorn
+from uploadContext import uploadClient
 import boto3
 from pydantic import BaseModel
+import os
+from pathlib import Path
 
 app = FastAPI()
+uploadClient = uploadClient(os.environ['SUPERMEM_API_KEY'])
 
 # DynamoDB client
 dynamodb = boto3.resource("dynamodb", region_name="us-east-1")
@@ -15,17 +20,26 @@ class Student(BaseModel):
     upcoming_tests: list[str] = []
     notes: str = ""
 
-@app.post("/students")
-def create_student(student: Student):
-    table.put_item(Item=student.dict())
-    return {"msg": "Student created", "student": student}
+class Text(BaseModel):
+    section: str
+    text: str
 
-@app.get("/students/{student_id}")
-def get_student(student_id: str):
-    resp = table.get_item(Key={"student_id": student_id})
-    return resp.get("Item", {})
+@app.post("/upload/file")
+async def upload_context_file(file: UploadFile = File(...)):
 
-@app.put("/students/{student_id}")
-def update_student(student_id: str, student: Student):
-    table.put_item(Item=student.dict())
-    return {"msg": "Student updated"}
+    save_path = os.path.join("uploads", file.filename)
+    
+    with open(save_path, "wb") as f:
+        content = await file.read()
+        f.write(content)
+    
+    uploadClient.uploadFile(Path(save_path))
+    return
+
+@app.post("/upload/text")
+async def upload_context_text(text: Text):
+    return uploadClient.uploadText(text.text, text.section)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
