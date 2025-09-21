@@ -5,6 +5,12 @@ import boto3
 from pydantic import BaseModel
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+SUPERMEMORY_API_KEY = os.getenv("SUPERMEMORY_API_KEY")
 
 app = FastAPI()
 uploadClient = uploadClient(os.environ['SUPERMEM_API_KEY'])
