@@ -7,6 +7,7 @@ from pydantic import BaseModel
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
@@ -19,6 +20,17 @@ Set environment variables SUPERMEM_API_KEY and OPENAI_API_KEY as shown on the do
 """
 
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # for dev: allow everything
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 uploadClient = uploadClient(os.environ['SUPERMEM_API_KEY'])
 model = SupermemoryOpenAI(os.environ['OPENAI_API_KEY'], os.environ['SUPERMEM_API_KEY'], "user123")
 
@@ -52,7 +64,7 @@ class Query(BaseModel):
     "message": "{LLM response}"
  }
 """
-@app.get("/query")
+@app.post("/query")
 async def query_llm(query: Query):
     return {
         "status": 200,
