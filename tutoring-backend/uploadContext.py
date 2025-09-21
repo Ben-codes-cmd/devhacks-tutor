@@ -1,12 +1,8 @@
-import os
 from supermemory import Supermemory
-from pathlib import Path
-
-# Get environment variables
 
 class uploadClient:
     def __init__(self, api_key):
-        self.SUPERMEM_API_KEY = api_key or os.getenv("SUPERMEM_API_KEY")
+        self.SUPERMEM_API_KEY = api_key
         if not self.SUPERMEM_API_KEY:
             raise ValueError("Supermemory API key not provided and SUPERMEMORY_API_KEY not set in environment.")
         
@@ -22,7 +18,7 @@ class uploadClient:
 
     def uploadFile(self, fileObj):
         response = self.client.memories.upload_file(
-            file=fileObj,
+            file=fileObj, # takes a path
         )
         print(response)
-        return
+        return 
